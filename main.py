@@ -7,7 +7,7 @@ from src.models import Post, User
 
 @app.shell_context_processor
 def make_shell_context():
-    """When 'flask shell' is called, this func registers these items to the shell"""
+    """When 'flask shell' is called, this func registers these items to the shell context"""
     return {"sa": sa, "so": so, "db": db, "User": User, "Post": Post}
 
 

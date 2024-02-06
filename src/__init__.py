@@ -1,6 +1,5 @@
-from typing import Tuple
-
 from flask import Flask
+from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -10,13 +9,6 @@ def init_flask_app() -> Flask:
     app = Flask(__name__)
     app.config.from_object("config.Config")
     return app
-
-
-def init_db_migrate(app: Flask) -> Tuple[SQLAlchemy, Migrate]:
-    """Initializes and returns the database and migration class"""
-    db = SQLAlchemy(app)
-    migrate = Migrate(app, db)
-    return db, migrate
 
 
 def attach_dash_app(app) -> Flask:
@@ -30,5 +22,8 @@ def attach_dash_app(app) -> Flask:
 
 
 app = init_flask_app()
-db, migrate = init_db_migrate(app)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+login = LoginManager(app)
+login.login_view = "login"  # tells flask which view function handles logins
 app = attach_dash_app(app)

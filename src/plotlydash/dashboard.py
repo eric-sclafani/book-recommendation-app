@@ -18,11 +18,12 @@ def init_dashboard(server):
 
     dash_app.layout = html.Div(
         children=[
-            dcc.Graph(figure=fig),
             html.A("click me", href="/index"),
+            dcc.Graph(figure=fig),
         ]
     )
 
+    init_callbacks(dash_app)
     return dash_app.server
 
 
