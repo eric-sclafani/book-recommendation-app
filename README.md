@@ -8,4 +8,3 @@ most similar books to that one.
 # Credits
 
 - For getting started with Flask https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
-- For integrating MySQL with Flask https://planetscale.com/blog/using-mysql-with-sql-alchemy-hands-on-examples
