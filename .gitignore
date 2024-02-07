@@ -130,6 +130,7 @@ dmypy.json
 
 data/
 *.db
+config.py
 .virtual_documents
 notebooks/
 .DS_Store

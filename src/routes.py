@@ -9,8 +9,8 @@ from src.forms import LoginForm, RegistrationForm
 from src.models import User
 
 
+@app.route("/")
 @app.route("/index")
-@login_required
 def index():
     """Home page of Flask Application."""
     posts = [
@@ -65,10 +65,24 @@ def login():
             next_page = url_for("index")
         return redirect(next_page)
 
-    return render_template("login.html", title="Sign In", form=form)
+    return render_template("login.html", title="Login", form=form)
 
 
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
+
+# <...> indicates a dynamic route. It will invoke the 'user' route function and pass the <...> text as an argument
+@app.route("/user/<username>")
+def user(username):
+    query = sa.select(User).where(User.username == username)
+
+    # if user is not found, automatically raises a 404 exception
+    user = db.first_or_404(query)
+    posts = [
+        {"author": user, "body": "Test post #1"},
+        {"author": user, "body": "Test post #2"},
+    ]
+    return render_template("user.html", user=user, posts=posts)
